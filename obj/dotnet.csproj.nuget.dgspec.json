@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Workspace\\gbay_back\\dotnet\\dotnet.csproj": {}
+    "C:\\Workspace\\gbay_back\\dotnet.csproj": {}
   },
   "projects": {
-    "C:\\Workspace\\gbay_back\\dotnet\\dotnet.csproj": {
+    "C:\\Workspace\\gbay_back\\dotnet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Workspace\\gbay_back\\dotnet\\dotnet.csproj",
+        "projectUniqueName": "C:\\Workspace\\gbay_back\\dotnet.csproj",
         "projectName": "dotnet",
-        "projectPath": "C:\\Workspace\\gbay_back\\dotnet\\dotnet.csproj",
+        "projectPath": "C:\\Workspace\\gbay_back\\dotnet.csproj",
         "packagesPath": "C:\\Users\\salih\\.nuget\\packages\\",
-        "outputPath": "C:\\Workspace\\gbay_back\\dotnet\\obj\\",
+        "outputPath": "C:\\Workspace\\gbay_back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\AppData\\Roaming\\NuGet\\NuGet.Config"
