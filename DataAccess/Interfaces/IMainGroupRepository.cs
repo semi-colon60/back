@@ -2,15 +2,15 @@ using dotnet.DataAccess.Models;
 
 namespace dotnet.DataAccess.Interfaces
 {
-    public interface IMainGroupRepository
-    {
-        MainGroup GetById(int id);
-        IEnumerable<MainGroup> GetAll();
-        void Add(MainGroup mainGroup);
-        void Update(MainGroup mainGroup);
-        void Delete(int id);
+	public interface IMainGroupRepository
+	{
+		Task<MainGroup> GetByIdAsync(int id);
+		Task<IEnumerable<MainGroup>> GetAllAsync();
+		Task AddAsync(MainGroup mainGroup);
+		Task UpdateAsync(MainGroup mainGroup);
+		Task DeleteAsync(int id);
 
 		// Additional get methods
-		MainGroup GetByName(string name);
-    }
+		Task<MainGroup> GetByNameAsync(string name);
+	}
 }

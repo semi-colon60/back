@@ -4,14 +4,14 @@ namespace dotnet.DataAccess.Interfaces
 {
 	public interface ISubGroupRepository
 	{
-		SubGroup GetById(int id);
-		IEnumerable<SubGroup> GetAll();
-		void Add(SubGroup subGroup);
-		void Update(SubGroup subGroup);
-		void Delete(int id);
+		Task<SubGroup> GetByIdAsync(int id);
+		Task<IEnumerable<SubGroup>> GetAllAsync();
+		Task AddAsync(SubGroup subGroup);
+		Task UpdateAsync(SubGroup subGroup);
+		Task DeleteAsync(int id);
 
 		// Additional get methods
-		SubGroup GetByName(string name);
-		IEnumerable<SubGroup> GetByMainGroupId(int mainGroupId);
+		Task<SubGroup> GetByNameAsync(string name);
+		Task<IEnumerable<SubGroup>> GetByMainGroupIdAsync(int mainGroupId);
 	}
 }

@@ -2,18 +2,18 @@ using dotnet.DataAccess.Models;
 
 namespace dotnet.Services.Interfaces
 {
-    public interface ISubGroupService
-    {
-        SubGroup GetById(int id);
-        IEnumerable<SubGroup> GetAll();
-        void Add(SubGroup subGroup);
-        void Update(SubGroup subGroup);
-        void Delete(int id);
+	public interface ISubGroupService
+	{
+		Task<SubGroup> GetByIdAsync(int id);
+		Task<IEnumerable<SubGroup>> GetAllAsync();
+		Task AddAsync(SubGroup subGroup);
+		Task UpdateAsync(SubGroup subGroup);
+		Task DeleteAsync(int id);
 
-        // Additional get methods
-		SubGroup GetByName(string name);
-        IEnumerable<SubGroup> GetByMainGroupId(int mainGroupId);
+		// Additional get methods
+		Task<SubGroup> GetByNameAsync(string name);
+		Task<IEnumerable<SubGroup>> GetByMainGroupIdAsync(int mainGroupId);
 
-        // Additional business logic methods
-    }
+		// Additional business logic methods
+	}
 }
