@@ -49,4 +49,29 @@ app.MapGet("/testConnection", async (ApplicationContext dbContext) =>
 .WithName("TestConnection")
 .WithOpenApi();
 
+// unit test dbContext
+app.MapGet("/testDbContext/{id}", async (ApplicationContext dbContext, int id) =>
+{
+    if (dbContext.Materials == null)
+        return Results.BadRequest("Material not found!");
+
+    // material 
+    var material = await dbContext.Materials.FindAsync(id);
+    if (material == null)
+        return Results.BadRequest("Material not found!");
+    Console.WriteLine(material.Name);
+
+    // access the main group
+    var mainGroup = await dbContext.MainGroups.FindAsync(material.MainGroupId);
+    if (mainGroup != null)
+    {
+        Console.WriteLine(material.Name + ", " + mainGroup.Name);
+        return Results.Ok(material);
+    }
+    else
+        return Results.BadRequest("Main Group not found!");
+})
+.WithName("TestDbContext")
+.WithOpenApi();
+
 app.Run();
