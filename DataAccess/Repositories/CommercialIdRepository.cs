@@ -1,75 +1,91 @@
 using dotnet.DataAccess.DbContexts;
 using dotnet.DataAccess.Interfaces;
 using dotnet.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnet.DataAccess.Repositories
 {
 	public class CommercialIdRepository : ICommercialIdRepository
 	{
 		public readonly ApplicationContext Context;
+		
 		public CommercialIdRepository(ApplicationContext context)
 		{
-			Context = context;
+			Context = context
+				?? throw new ArgumentNullException(nameof(context));
 		}
 
-        public Task AddAsync(CommercialId commercialId)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task AddAsync(CommercialId commercialId)
+		{
+			await Context.CommercialIds.AddAsync(commercialId);
+			await Context.SaveChangesAsync();
+		}
 
-        public Task DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task DeleteAsync(int id)
+		{
+			var commercialId = await GetByIdAsync(id);
+			if (commercialId != null)
+			{
+				Context.CommercialIds.Remove(commercialId);
+				await Context.SaveChangesAsync();
+			}
+			else 
+				throw new ArgumentNullException(nameof(commercialId));
+		}
 
-        public Task<IEnumerable<CommercialId>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+		// Update uses a synchronous method.
+		public async Task UpdateAsync(CommercialId commercialId)
+		{
+			Context.CommercialIds.Update(commercialId);
+			await Context.SaveChangesAsync();
+		}
 
-        public Task<IEnumerable<CommercialId>> GetByCommercialTitleAsync(string commercialTitle)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<CommercialId> GetByIdAsync(int id)
+		{
+			return await Context.CommercialIds.FirstOrDefaultAsync(c => c.CommercialID == id)
+				?? throw new ArgumentNullException(nameof(id));
+		}
 
-        public Task<IEnumerable<CommercialId>> GetByEmailAsync(string email)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetAllAsync()
+		{
+			return await Context.CommercialIds.ToListAsync();
+		}
 
-        public Task<CommercialId> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetByCommercialTitleAsync(string commercialTitle)
+		{
+			return await Context.CommercialIds.Where(c => c.CommercialTitle == commercialTitle).ToListAsync();
+		}
 
-        public Task<IEnumerable<CommercialId>> GetByNameAndSurnameAsync(string name, string surname)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetByEmailAsync(string email)
+		{
+			return await Context.CommercialIds.Where(c => c.Email == email).ToListAsync();
+		}
 
-        public Task<IEnumerable<CommercialId>> GetByNameAsync(string name)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetByNameAndSurnameAsync(string name, string surname)
+		{
+			return await Context.CommercialIds.Where(c => c.Name == name && c.Surname == surname).ToListAsync();
+		}
 
-        public Task<IEnumerable<CommercialId>> GetByPhoneAsync(string phone)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetByNameAsync(string name)
+		{
+			return await Context.CommercialIds.Where(c => c.Name == name).ToListAsync();
+		}
 
-        public Task<IEnumerable<CommercialId>> GetBySurnameAsync(string surname)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetByPhoneAsync(string phone)
+		{
+			return await Context.CommercialIds.Where(c => c.Phone == phone).ToListAsync();
+		}
 
-        public Task<CommercialId> GetByUsernameAsync(string username)
-        {
-            throw new NotImplementedException();
-        }
+		public async Task<IEnumerable<CommercialId>> GetBySurnameAsync(string surname)
+		{
+			return await Context.CommercialIds.Where(c => c.Surname == surname).ToListAsync();
+		}
 
-        public Task UpdateAsync(CommercialId commercialId)
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public async Task<CommercialId> GetByUsernameAsync(string username)
+		{
+			return await Context.CommercialIds.FirstOrDefaultAsync(c => c.Username == username)
+				?? throw new ArgumentNullException(nameof(username));
+		}
+
+	}
 }
