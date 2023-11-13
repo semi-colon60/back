@@ -1,5 +1,6 @@
 using dotnet.DataAccess.DbContexts;
 using dotnet.DataAccess.Interfaces;
+using dotnet.DataAccess.Models;
 using dotnet.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 // Repositories for Unit Test
 builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 builder.Services.AddScoped<IMainGroupRepository, MainGroupRepository>();
+builder.Services.AddScoped<ICommercialIdRepository, CommercialIdRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -80,12 +82,6 @@ app.MapGet("/testDbContext/{id}", async (ApplicationContext dbContext, int id) =
 .WithName("TestDbContext")
 .WithOpenApi();
 
-app.MapGet("/deneme", async () => {
-	return Results.Ok("deneme");
-})
-.WithName("Deneme")
-.WithOpenApi();
-
 app.MapGet("/testMaterialRepository/{id}", async (IMaterialRepository materialRepository, IMainGroupRepository mainGroupRepository, int id) =>
 {
 	var material = await materialRepository.GetByIdAsync(id);
@@ -109,5 +105,20 @@ app.MapGet("/testMaterialRepository/{id}", async (IMaterialRepository materialRe
 .WithName("TestMaterialRepository")
 .WithOpenApi();
 
+app.MapPost("/addCommercialId", async (CommercialId commercialId, ICommercialIdRepository commercialIdRepository) =>
+{
+	// Validate the input
+	if (commercialId == null || string.IsNullOrWhiteSpace(commercialId.Name))
+	{
+		return Results.BadRequest("Invalid input data");
+	}
+
+	// Add the new CommercialId to the repository
+	await commercialIdRepository.AddAsync(commercialId);
+
+	return Results.Created($"/commercialIds/{commercialId.CommercialID}", commercialId);
+})
+.WithName("AddCommercialId")
+.WithOpenApi();
 
 app.Run();
