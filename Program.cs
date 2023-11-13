@@ -1,5 +1,6 @@
 using dotnet.DataAccess.DbContexts;
 using dotnet.DataAccess.Interfaces;
+using dotnet.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Database Connection
 builder.Services.AddDbContext<ApplicationContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Repositories for Unit Test
+builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
+builder.Services.AddScoped<IMainGroupRepository, MainGroupRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -81,67 +86,25 @@ app.MapGet("/deneme", async () => {
 .WithName("Deneme")
 .WithOpenApi();
 
-// app.MapGet("/testMaterialRepository/{id}", async (IMaterialRepository materialRepository, IMainGroupRepository mainGroupRepository, int id) =>
-// {
-// 	var material = await materialRepository.GetByIdAsync(id);
-
-// 	if (material == null)
-// 		return Results.BadRequest("material not found!");
-
-// 	Console.WriteLine(material.Name);
-
-// 	// Access the MainGroup
-// 	var mainGroup = await mainGroupRepository.GetByIdAsync(material.MainGroupId);
-
-// 	if (mainGroup != null)
-// 	{
-// 		Console.WriteLine(material.Name + ", " + mainGroup.Name);
-// 		return Results.Ok(material);
-// 	}
-// 	else
-// 		return Results.BadRequest("Main Group not found!");
-// })
-// .WithName("TestMaterialRepository")
-// .WithOpenApi();
-
-app.MapGet("/testMaterialRepository/{id}", async (context) =>
+app.MapGet("/testMaterialRepository/{id}", async (IMaterialRepository materialRepository, IMainGroupRepository mainGroupRepository, int id) =>
 {
-    // Resolve services from the service provider
-    var materialRepository = context.RequestServices.GetRequiredService<IMaterialRepository>();
-    var mainGroupRepository = context.RequestServices.GetRequiredService<IMainGroupRepository>();
+	var material = await materialRepository.GetByIdAsync(id);
 
-    // Extract the 'id' parameter from the route
-    if (context.Request.RouteValues["id"] is not int id)
-    {
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsync("Invalid id parameter");
-        return;
-    }
+	if (material == null)
+		return Results.BadRequest("material not found!");
 
-    var material = await materialRepository.GetByIdAsync(id);
+	Console.WriteLine(material.Name);
 
-    if (material == null)
-    {
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsync("Material not found!");
-        return;
-    }
+	// Access the MainGroup
+	var mainGroup = await mainGroupRepository.GetByIdAsync(material.MainGroupId);
 
-    Console.WriteLine(material.Name);
-
-    // Access the MainGroup
-    var mainGroup = await mainGroupRepository.GetByIdAsync(material.MainGroupId);
-
-    if (mainGroup != null)
-    {
-        Console.WriteLine(material.Name + ", " + mainGroup.Name);
-        await context.Response.WriteAsync($"Material: {material.Name}, Main Group: {mainGroup.Name}");
-    }
-    else
-    {
-        context.Response.StatusCode = 400;
-        await context.Response.WriteAsync("Main Group not found!");
-    }
+	if (mainGroup != null)
+	{
+		Console.WriteLine(material.Name + ", " + mainGroup.Name);
+		return Results.Ok(material);
+	}
+	else
+		return Results.BadRequest("Main Group not found!");
 })
 .WithName("TestMaterialRepository")
 .WithOpenApi();
