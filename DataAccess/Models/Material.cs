@@ -23,36 +23,47 @@ namespace dotnet.DataAccess.Models
 		public int	MaterialId { get; set; }
 
 		[Column("name")]
-		public string ?Name { get; set; }
+		[MaxLength(255, ErrorMessage ="name cannot exceed 255 characters.")]
+		[Required(ErrorMessage = "name is required.")]
+		public string Name { get; set; } = string.Empty;
 
 		[Column("description")]
-		public string ?Description { get; set; }
+		[MaxLength(255, ErrorMessage ="description cannot exceed 255 characters.")]
+		public string Description { get; set; } = string.Empty;
 
 		// The unit is stored in an integer value in the database.
 		[Column("unit")]
-		public UnitType	?Unit {get; set; }
+		[Required(ErrorMessage = "unit is required.")]
+		public UnitType	Unit {get; set; } = UnitType.Count;
 
 		[Column("unit_price")]
-		public string	?UnitPrice { get; set; }
+		[MaxLength(255, ErrorMessage ="unit_price cannot exceed 255 characters.")]
+		[Required(ErrorMessage = "unit_price is required.")]
+		public string	UnitPrice { get; set; } = string.Empty;
 
 		[Column("mass")]
-		public string	?Mass { get; set; }
+		[MaxLength(255, ErrorMessage ="mass cannot exceed 255 characters.")]
+		public string	Mass { get; set; } = string.Empty;
 
 		[Column("volume")]
-		public string	?Volume { get; set; }
+		[MaxLength(255, ErrorMessage ="volume cannot exceed 255 characters.")]
+		public string	Volume { get; set; } = string.Empty;
 
 		[Column("count")]
-		public int	?Count { get; set; }
+		public int	Count { get; set; } = 0;
 
 		[Column("length")]
-		public string	?Length { get; set; }
+		[MaxLength(255, ErrorMessage ="length cannot exceed 255 characters.")]
+		public string	Length { get; set; } = string.Empty;
 
 		[ForeignKey(nameof(MainGroupId))]
 		[Column("main_group_id")]
-		public int MainGroupId { get; set; }
+		[Required(ErrorMessage = "main_group_id is required.")]
+		public int MainGroupId { get; set; } = 0;
 
 		[ForeignKey(nameof(SubGroupId))]
 		[Column("sub_group_id")]
-		public int SubGroupId { get; set; }
+		[Required(ErrorMessage ="sub_group_id is required.")]
+		public int SubGroupId { get; set; } = 0;
 	}
 }
