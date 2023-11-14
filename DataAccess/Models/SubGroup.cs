@@ -12,13 +12,17 @@ namespace dotnet.DataAccess.Models {
         public int SubGroupId { get; set; }
 
         [Column("name")]
-        public string ?Name { get; set; }
+        [Required(ErrorMessage = "name is required.")]
+        [MaxLength(255, ErrorMessage ="name cannot exceed 255 characters.")]
+        public string Name { get; set; } = string.Empty;
 
         [Column("description")]
-        public string ?Description { get; set; }
+        [MaxLength(255, ErrorMessage ="description cannot exceed 255 characters.")]
+        public string Description { get; set; } = string.Empty;
 
         [ForeignKey(nameof(MainGroupId))]
         [Column("main_group_id")]
-        public int MainGroupId { get; set; }
+        [Required(ErrorMessage = "main_group_id is required.")]
+        public int MainGroupId { get; set; } = 0;
     }
 }

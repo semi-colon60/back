@@ -13,9 +13,12 @@ namespace dotnet.DataAccess.Models
         public int MainGroupId { get; set; }
 
         [Column("name")]
-        public string ?Name { get; set; }
+        [Required(ErrorMessage = "name is required.")]
+        [MaxLength(255, ErrorMessage ="name cannot exceed 255 characters.")]
+        public string Name { get; set; } = string.Empty;
 
         [Column("description")]
-        public string ?Description { get; set; }
+        [MaxLength(255, ErrorMessage ="description cannot exceed 255 characters.")]
+        public string Description { get; set; } = string.Empty;
     }
 }
