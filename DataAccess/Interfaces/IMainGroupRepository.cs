@@ -11,6 +11,6 @@ namespace dotnet.DataAccess.Interfaces
 		Task DeleteAsync(int id);
 
 		// Additional get methods
-		Task<MainGroup> GetByNameAsync(string name);
+		Task<MainGroup?> GetByNameAsync(string name);
 	}
 }
