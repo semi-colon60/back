@@ -21,7 +21,7 @@ namespace dotnet.DataAccess.Repositories
 			await Context.SaveChangesAsync();
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task DeleteAsync(Int64 id)
 		{
 			var commercialId = await GetByIdAsync(id);
 			if (commercialId != null)
@@ -40,7 +40,7 @@ namespace dotnet.DataAccess.Repositories
 			await Context.SaveChangesAsync();
 		}
 
-		public async Task<CommercialId> GetByIdAsync(int id)
+		public async Task<CommercialId> GetByIdAsync(Int64 id)
 		{
 			return await Context.CommercialIds.FirstOrDefaultAsync(c => c.CommercialID == id)
 				?? throw new ArgumentNullException(nameof(id));
