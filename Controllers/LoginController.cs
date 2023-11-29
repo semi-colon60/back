@@ -15,7 +15,7 @@ namespace dotnet.Controllers
 			_loginService = loginService;
 		}
 
-		[HttpGet("{email}/getByEmail")]
+		[HttpGet("LoginEmail/{email}")]
 		public async Task<IActionResult> GetByEmailAsync(string email, string password)
 		{
 			var result = await _loginService.GetByEmailAsync(email, password);
@@ -24,7 +24,7 @@ namespace dotnet.Controllers
 			return Ok(result);
 		}
 
-		[HttpGet("{username}/getByUsername")]
+		[HttpGet("LoginUsername/{username}")]
 		public async Task<IActionResult> GetByUsernameAsync(string username, string password)
 		{
 			var result = await _loginService.GetByUsernameAsync(username, password);
