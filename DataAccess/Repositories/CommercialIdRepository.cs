@@ -56,9 +56,9 @@ namespace dotnet.DataAccess.Repositories
 			return await Context.CommercialIds.Where(c => c.CommercialTitle == commercialTitle).ToListAsync();
 		}
 
-		public async Task<IEnumerable<CommercialId>> GetByEmailAsync(string email)
+		public async Task<CommercialId?> GetByEmailAsync(string email)
 		{
-			return await Context.CommercialIds.Where(c => c.Email == email).ToListAsync();
+			return await Context.CommercialIds.FirstOrDefaultAsync(c => c.Email == email);
 		}
 
 		public async Task<IEnumerable<CommercialId>> GetByNameAndSurnameAsync(string name, string surname)
@@ -81,10 +81,9 @@ namespace dotnet.DataAccess.Repositories
 			return await Context.CommercialIds.Where(c => c.Surname == surname).ToListAsync();
 		}
 
-		public async Task<CommercialId> GetByUsernameAsync(string username)
+		public async Task<CommercialId?> GetByUsernameAsync(string username)
 		{
-			return await Context.CommercialIds.FirstOrDefaultAsync(c => c.Username == username)
-				?? throw new ArgumentNullException(nameof(username));
+			return await Context.CommercialIds.FirstOrDefaultAsync(c => c.Username == username);
 		}
 
 	}

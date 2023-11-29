@@ -16,7 +16,7 @@ namespace dotnet.DataAccess.Interfaces
 		Task<IEnumerable<CommercialId>> GetByNameAndSurnameAsync(string name, string surname);
 		Task<IEnumerable<CommercialId>> GetByCommercialTitleAsync(string commercialTitle);
 		Task<IEnumerable<CommercialId>> GetByPhoneAsync(string phone);
-		Task<IEnumerable<CommercialId>> GetByEmailAsync(string email);
-		Task<CommercialId> GetByUsernameAsync(string username);
+		Task<CommercialId?> GetByEmailAsync(string email);
+		Task<CommercialId?> GetByUsernameAsync(string username);
 	}
 }

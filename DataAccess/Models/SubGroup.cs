@@ -9,7 +9,7 @@ namespace dotnet.DataAccess.Models {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("sub_group_id")]
-        public int SubGroupId { get; set; }
+        public Int64 SubGroupId { get; set; }
 
         [Column("name")]
         [Required(ErrorMessage = "name is required.")]
