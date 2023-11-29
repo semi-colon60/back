@@ -21,11 +21,8 @@ builder.Services.AddScoped<IMainGroupRepository, MainGroupRepository>();
 builder.Services.AddScoped<ISubGroupRepository, SubGroupRepository>();
 builder.Services.AddScoped<ICommercialIdRepository, CommercialIdRepository>();
 
-//Services for Unit Test
-builder.Services.AddScoped<IMaterialService, MaterialService>();
-builder.Services.AddScoped<IMainGroupService, MainGroupService>();
-builder.Services.AddScoped<ISubGroupService, SubGroupService>();
-builder.Services.AddScoped<ICommercialIdService, CommercialIdService>();
+//Dependency injection
+builder.Services.AddScoped<ILoginService, LoginService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
