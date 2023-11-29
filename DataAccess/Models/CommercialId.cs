@@ -10,7 +10,7 @@ namespace dotnet.DataAccess.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("commercial_id")]
-        public int CommercialID { get; set; }
+        public Int64 CommercialID { get; set; }
 
         [Column("name")]
         [Required(ErrorMessage = "name is required.")]

@@ -20,7 +20,7 @@ namespace dotnet.DataAccess.Models
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		[Column("material_id")]
-		public int	MaterialId { get; set; }
+		public Int64 MaterialId { get; set; }
 
 		[Column("name")]
 		[MaxLength(255, ErrorMessage ="name cannot exceed 255 characters.")]
