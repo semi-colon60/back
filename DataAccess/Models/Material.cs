@@ -59,11 +59,11 @@ namespace dotnet.DataAccess.Models
 		[ForeignKey(nameof(MainGroupId))]
 		[Column("main_group_id")]
 		[Required(ErrorMessage = "main_group_id is required.")]
-		public int MainGroupId { get; set; } = 0;
+		public Int64 MainGroupId { get; set; } = 0;
 
 		[ForeignKey(nameof(SubGroupId))]
 		[Column("sub_group_id")]
 		[Required(ErrorMessage ="sub_group_id is required.")]
-		public int SubGroupId { get; set; } = 0;
+		public Int64 SubGroupId { get; set; } = 0;
 	}
 }
