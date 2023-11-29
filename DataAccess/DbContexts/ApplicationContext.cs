@@ -1,3 +1,4 @@
+using dotnet.DataAcces.Models;
 using dotnet.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,7 @@ namespace dotnet.DataAccess.DbContexts {
 		public DbSet<Material> Materials { get; set; }
 		public DbSet<MainGroup> MainGroups { get; set; }
 		public DbSet<SubGroup> SubGroups { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

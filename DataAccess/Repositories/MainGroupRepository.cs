@@ -44,10 +44,9 @@ namespace dotnet.DataAccess.Repositories
 				?? throw new ArgumentNullException(nameof(id));
         }
 
-        public async Task<MainGroup> GetByNameAsync(string name)
+        public async Task<MainGroup?> GetByNameAsync(string name)
         {
-            return await Context.MainGroups.FirstOrDefaultAsync(m => m.Name == name)
-				?? throw new ArgumentNullException(nameof(name));
+            return await Context.MainGroups.FirstOrDefaultAsync(m => m.Name == name);
         }
 
         public async Task UpdateAsync(MainGroup mainGroup)

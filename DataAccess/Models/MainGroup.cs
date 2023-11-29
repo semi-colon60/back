@@ -10,7 +10,7 @@ namespace dotnet.DataAccess.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("main_group_id")]
-        public int MainGroupId { get; set; }
+        public Int64 MainGroupId { get; set; }
 
         [Column("name")]
         [Required(ErrorMessage = "name is required.")]

@@ -55,10 +55,9 @@ namespace dotnet.DataAccess.Repositories
 			return await Context.SubGroups.Where(m => m.MainGroupId == mainGroupId).ToListAsync();
         }
 
-        public async Task<SubGroup> GetByNameAsync(string name)
+        public async Task<SubGroup?> GetByNameAsync(string name)
         {
-			return await Context.SubGroups.FirstOrDefaultAsync(m => m.Name == name)
-				?? throw new ArgumentNullException(nameof(name));
+			return await Context.SubGroups.FirstOrDefaultAsync(m => m.Name == name);
         }
     }
 }

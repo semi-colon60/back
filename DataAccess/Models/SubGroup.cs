@@ -9,7 +9,7 @@ namespace dotnet.DataAccess.Models {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("sub_group_id")]
-        public int SubGroupId { get; set; }
+        public Int64 SubGroupId { get; set; }
 
         [Column("name")]
         [Required(ErrorMessage = "name is required.")]
@@ -23,6 +23,6 @@ namespace dotnet.DataAccess.Models {
         [ForeignKey(nameof(MainGroupId))]
         [Column("main_group_id")]
         [Required(ErrorMessage = "main_group_id is required.")]
-        public int MainGroupId { get; set; } = 0;
+        public Int64 MainGroupId { get; set; } = 0;
     }
 }
