@@ -21,7 +21,7 @@ namespace dotnet.Controllers
 			var result = await _loginService.GetByEmailAsync(email, password);
 			if (result == null)
 				return NotFound("User Not Found!");
-			return Ok(result);
+			return Ok("Login success!");
 		}
 
 		[HttpGet("LoginUsername/{username}")]
@@ -30,7 +30,7 @@ namespace dotnet.Controllers
 			var result = await _loginService.GetByUsernameAsync(username, password);
 			if (result == null)
 				return NotFound("User Not Found!");
-			return Ok(result);
+			return Ok("Login success!");
 		}
 
 	}
