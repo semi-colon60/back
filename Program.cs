@@ -15,14 +15,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Repositories for Unit Test
+//Dependency injection
 builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 builder.Services.AddScoped<IMainGroupRepository, MainGroupRepository>();
 builder.Services.AddScoped<ISubGroupRepository, SubGroupRepository>();
 builder.Services.AddScoped<ICommercialIdRepository, CommercialIdRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 
 //Dependency injection
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
