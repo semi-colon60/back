@@ -40,10 +40,12 @@ namespace dotnet.DataAccess.Models
 		public string ?Description { get; set; } = string.Empty;
 
 		[Column("email")]
+		[EmailAddress(ErrorMessage = "Invalid email address.")]
 		[MaxLength(25, ErrorMessage = "email cannot exceed 25 characters.")]
 		public string ?Email { get; set; } = string.Empty;
 
 		[Column("phone")]
+		[Phone(ErrorMessage = "Invalid phone number.")]
 		[MaxLength(11, ErrorMessage = "phone cannot exceed 11 characters.")]
 		public string ?Phone { get; set; } = string.Empty;
 	}
