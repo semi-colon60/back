@@ -25,6 +25,16 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 //Dependency injection
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
+// Add policy for CORS
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAll", builder =>
+	{
+		builder.AllowAnyOrigin()
+			.AllowAnyMethod()
+			.AllowAnyHeader();
+	});
+});
 
 // Add policy for CORS
 builder.Services.AddCors(options =>
@@ -56,6 +66,7 @@ app.UseHttpsRedirection();
 // app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors("AllowAll");
 
 app.UseCors("AllowAll");
 
