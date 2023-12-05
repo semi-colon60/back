@@ -1,8 +1,10 @@
+using dotnet.Services.DTOs;
+
 namespace dotnet.Services.Interfaces
 {
 	public interface ILoginService
 	{
-		public Task<CommercialId?> GetCommercialIdByEmailAsync(string email, string password);
-		public Task<CommercialId?> GetCommercialIdByUsernameAsync(string username, string password);
+		public Task<LoginUserDTO?> GetByEmailAsync(string email, string password);
+		public Task<LoginUserDTO?> GetByUsernameAsync(string username, string password);
 	}
 }

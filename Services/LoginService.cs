@@ -1,4 +1,6 @@
+using System.Formats.Asn1;
 using dotnet.DataAccess.Interfaces;
+using dotnet.Services.DTOs;
 using dotnet.Services.Interfaces;
 
 namespace dotnet.Services {
@@ -12,20 +14,24 @@ namespace dotnet.Services {
 			_commercialIdRepository = commercialIdRepository;
 		}
 
-		public async Task<CommercialId?> GetCommercialIdByEmailAsync(string email, string password)
+		public async Task<LoginUserDTO?> GetByEmailAsync(string email, string password)
 		{
 			var result = await _commercialIdRepository.GetByEmailAsync(email);
+			var loginUserDTO = new LoginUserDTO(result.IsAdmin, result.CommercialID);
 			if(result != null && result.Password == password) {
-				return result;
+				return loginUserDTO;
 			}
 			return null;
 		}
 
-		public async Task<CommercialId?> GetCommercialIdByUsernameAsync(string username, string password)
+		public async Task<LoginUserDTO?> GetByUsernameAsync(string username, string password)
 		{
 			var result = await _commercialIdRepository.GetByUsernameAsync(username);
-			if(result != null && result.Password == password) return result;
-			else return null;
+			var loginUserDTO = new LoginUserDTO(result.IsAdmin, result.CommercialID);
+			if(result != null && result.Password == password) {
+				return loginUserDTO;
+			}
+			return null;
 		}
 
 	}
