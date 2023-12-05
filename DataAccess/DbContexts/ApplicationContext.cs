@@ -15,5 +15,6 @@ namespace dotnet.DataAccess.DbContexts {
 		public DbSet<SubGroup> SubGroups { get; set; }
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }
+		public DbSet<Address> Addresses { get; set; }
     }
 }
