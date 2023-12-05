@@ -13,9 +13,15 @@ namespace dotnet.Controllers
 		}
 
 		[HttpPut("Cart/ChangeAddress")]
-		public async Task<IActionResult> ChangeAddressAsync()
+		public async Task<IActionResult> ChangeAddressAsync(long id)
 		{
 			throw new NotImplementedException();
-		}	
+		}
+
+		[HttpPost("Cart/AddOrder")]
+		public async Task<IActionResult> AddOrderAsync(Order order)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
