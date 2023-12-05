@@ -23,5 +23,11 @@ namespace dotnet.Controllers
 		{
 			throw new NotImplementedException();
 		}
+
+		[HttpPost("Materials/AddToCart")]
+		public async Task<IActionResult> AddMaterialToCart(Material material)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }
