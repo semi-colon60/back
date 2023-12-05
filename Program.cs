@@ -1,5 +1,4 @@
 global using dotnet.DataAccess.Models;
-using dotnet.Controllers;
 using dotnet.DataAccess.DbContexts;
 using dotnet.DataAccess.Interfaces;
 using dotnet.DataAccess.Repositories;
@@ -27,6 +26,17 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
 
+// Add policy for CORS
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("AllowAll", builder =>
+	{
+		builder.AllowAnyOrigin()
+			.AllowAnyMethod()
+			.AllowAnyHeader();
+	});
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -46,6 +56,10 @@ app.UseHttpsRedirection();
 // app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowAll");
+
+app.Run();
 
 // unit test for db connection
 // app.MapGet("/testConnection", async (ApplicationContext dbContext) =>
@@ -135,5 +149,3 @@ app.MapControllers();
 // })
 // .WithName("AddCommercialId")
 // .WithOpenApi();
-
-app.Run();
