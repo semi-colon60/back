@@ -23,6 +23,6 @@ namespace dotnet.DataAccess.Models {
         [ForeignKey(nameof(MainGroupId))]
         [Column("main_group_id")]
         [Required(ErrorMessage = "main_group_id is required.")]
-        public int MainGroupId { get; set; } = 0;
+        public Int64 MainGroupId { get; set; } = 0;
     }
 }
