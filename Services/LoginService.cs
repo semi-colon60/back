@@ -12,7 +12,7 @@ namespace dotnet.Services {
 			_commercialIdRepository = commercialIdRepository;
 		}
 
-		public async Task<CommercialId?> GetByEmailAsync(string email, string password)
+		public async Task<CommercialId?> GetCommercialIdByEmailAsync(string email, string password)
 		{
 			var result = await _commercialIdRepository.GetByEmailAsync(email);
 			if(result != null && result.Password == password) {
@@ -21,7 +21,7 @@ namespace dotnet.Services {
 			return null;
 		}
 
-		public async Task<CommercialId?> GetByUsernameAsync(string username, string password)
+		public async Task<CommercialId?> GetCommercialIdByUsernameAsync(string username, string password)
 		{
 			var result = await _commercialIdRepository.GetByUsernameAsync(username);
 			if(result != null && result.Password == password) return result;

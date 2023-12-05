@@ -47,6 +47,18 @@ namespace dotnet.DataAccess.Repositories
             return await _context.Orders.FirstOrDefaultAsync(c => c.OrderId == id);
         }
 
+        public async Task UpdateAddressAsync(long addressId, long orderId)
+        {
+            var entityToUpdate = await GetByIdAsync(orderId);
+
+            if (entityToUpdate != null)
+            {
+                entityToUpdate.AddressId = addressId;
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public async Task UpdateAsync(Order order)
         {
             _context.Orders.Update(order);

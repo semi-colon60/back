@@ -9,6 +9,7 @@ namespace dotnet.DataAccess.Interfaces
 		Task AddAsync(Order order);
 		Task UpdateAsync(Order order);
 		Task DeleteAsync(Int64 id);
+		Task UpdateAddressAsync(long addressId, long orderId);
 
 		//Additional add methods
 		Task<Order?> GetByCommercialIdAsync(Int64 id);
