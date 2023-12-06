@@ -1,16 +1,33 @@
+using dotnet.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace dotnet.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/Admin/[controller]")]
 	[ApiController]
 	public class AddUserController : ControllerBase
 	{
-		[HttpPost("AddUser")]
-		public async Task<IActionResult> AddUserAsync(CommercialId commercialId)
+		private readonly IAddUserService _addUserService;
+		public AddUserController(IAddUserService addUserService)
 		{
-			throw new NotImplementedException();
+			_addUserService = addUserService;
 		}
-	}
+		
+         [HttpPost("")]
+        public async Task<IActionResult> AddUser([FromBody] CommercialId commercialId)
+        {
+            
+            try
+            {
+               await _addUserService.PushAsync(commercialId);
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error handling POST request\n");
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+    }
 }
