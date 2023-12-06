@@ -25,6 +25,8 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 //Dependency injection
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
+builder.Services.AddScoped<IAddUserService, AddUserService>();
+
 // Add policy for CORS
 builder.Services.AddCors(options =>
 {
