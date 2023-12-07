@@ -22,10 +22,10 @@ namespace dotnet.DataAccess.Models
 		[Column("material_id")]
 		public Int64 MaterialId { get; set; }
 
-		[Column("name")]
-		[MaxLength(255, ErrorMessage ="name cannot exceed 255 characters.")]
-		[Required(ErrorMessage = "name is required.")]
-		public string Name { get; set; } = string.Empty;
+		[Column("material_code")]
+		[MaxLength(255, ErrorMessage ="material_code cannot exceed 255 characters.")]
+		[Required(ErrorMessage = "material_code is required.")]
+		public string MaterialCode { get; set; } = string.Empty;
 
 		[Column("description")]
 		[MaxLength(255, ErrorMessage ="description cannot exceed 255 characters.")]
