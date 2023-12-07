@@ -50,7 +50,7 @@ namespace dotnet.DataAccess.Repositories
 				?? throw new ArgumentNullException(nameof(id));
         }
 
-        public async Task<IEnumerable<SubGroup>> GetByMainGroupIdAsync(int mainGroupId)
+        public async Task<IEnumerable<SubGroup>> GetByMainGroupIdAsync(long mainGroupId)
         {
 			return await Context.SubGroups.Where(m => m.MainGroupId == mainGroupId).ToListAsync();
         }
