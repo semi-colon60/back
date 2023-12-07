@@ -21,7 +21,7 @@ namespace dotnet.DataAccess.Repositories
 			await Context.SaveChangesAsync();
 		}
 
-		public async Task DeleteAsync(int id)
+		public async Task DeleteAsync(long id)
 		{
 			var material = await GetByIdAsync(id);
 			if (material != null)
@@ -43,18 +43,18 @@ namespace dotnet.DataAccess.Repositories
 			return await Context.Materials.ToListAsync();
 		}
 
-		public async Task<Material> GetByIdAsync(int id)
+		public async Task<Material> GetByIdAsync(long id)
 		{
 			return await Context.Materials.FirstOrDefaultAsync(m => m.MaterialId == id)
 				?? throw new ArgumentNullException(nameof(id));
 		}
 
-		public async Task<IEnumerable<Material>> GetByMainGroupIdAsync(int mainGroupId)
+		public async Task<IEnumerable<Material>> GetByMainGroupIdAsync(long mainGroupId)
 		{
 			return await Context.Materials.Where(m => m.MainGroupId == mainGroupId).ToListAsync();
 		}
 
-		public async Task<IEnumerable<Material>> GetBySubGroupIdAsync(int subGroupId)
+		public async Task<IEnumerable<Material>> GetBySubGroupIdAsync(long subGroupId)
 		{
 			return await Context.Materials.Where(m => m.SubGroupId == subGroupId).ToListAsync();
 		}
