@@ -12,6 +12,6 @@ namespace dotnet.DataAccess.Interfaces
 
 		// Additional get methods
 		Task<SubGroup?> GetByNameAsync(string name);
-		Task<IEnumerable<SubGroup>> GetByMainGroupIdAsync(int mainGroupId);
+		Task<IEnumerable<SubGroup>> GetByMainGroupIdAsync(long mainGroupId);
 	}
 }
