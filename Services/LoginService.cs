@@ -14,7 +14,7 @@ namespace dotnet.Services {
 			_commercialIdRepository = commercialIdRepository;
 		}
 
-		public async Task<LoginUserDTO?> GetByEmailAsync(string email, string password)
+		public async Task<LoginUserDTO?> GetCommercialIdByEmailAsync(string email, string password)
 		{
 			var result = await _commercialIdRepository.GetByEmailAsync(email);
 			var loginUserDTO = new LoginUserDTO(result.IsAdmin, result.CommercialID);
@@ -24,7 +24,7 @@ namespace dotnet.Services {
 			return null;
 		}
 
-		public async Task<LoginUserDTO?> GetByUsernameAsync(string username, string password)
+		public async Task<LoginUserDTO?> GetCommercialIdByUsernameAsync(string username, string password)
 		{
 			var result = await _commercialIdRepository.GetByUsernameAsync(username);
 			var loginUserDTO = new LoginUserDTO(result.IsAdmin, result.CommercialID);
