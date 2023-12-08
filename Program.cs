@@ -25,6 +25,7 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 //Dependency injection for services
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
+builder.Services.AddScoped<IAddMaterialService, AddMaterialService>();
 builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>();
 
 builder.Services.AddScoped<IAddUserService, AddUserService>();
