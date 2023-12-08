@@ -1,4 +1,3 @@
-using dotnet.Services.DTOs;
 
 namespace dotnet.Services.Interfaces
 {

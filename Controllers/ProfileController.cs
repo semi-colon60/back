@@ -7,17 +7,22 @@ namespace dotnet.Controllers
 	[ApiController]
 	public class ProfileController : ControllerBase
 	{
-		private readonly IProfileService _ProfileService;
+		private readonly IProfileService _IProfileService;
 
 		public ProfileController(IProfileService profileService)
 		{
-			_ProfileService = profileService;
+			// Console.WriteLine("xd");
+
+			_IProfileService = profileService;
+
 		}
 
 		[HttpGet("Profile/{userid}")]
 		public async Task<IActionResult> GetProfileAsync(long userid)
 		{
-			var result = await _ProfileService.GetCommercialIdById(userid);
+			// return Ok("xd");
+
+			var result = await _IProfileService.GetCommercialIdById(userid);
 			if (result == null)
 				return NotFound("User Not Found!");
 			return Ok(result);
