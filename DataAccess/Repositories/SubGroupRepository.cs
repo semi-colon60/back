@@ -21,7 +21,7 @@ namespace dotnet.DataAccess.Repositories
 			await Context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(long id)
         {
 			var subGroup = await GetByIdAsync(id);
 			if (subGroup != null)
@@ -44,7 +44,7 @@ namespace dotnet.DataAccess.Repositories
 			return await Context.SubGroups.ToListAsync();
         }
 
-        public async Task<SubGroup> GetByIdAsync(int id)
+        public async Task<SubGroup> GetByIdAsync(long id)
         {
 			return await Context.SubGroups.FirstOrDefaultAsync(m => m.SubGroupId == id)
 				?? throw new ArgumentNullException(nameof(id));

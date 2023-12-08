@@ -1,3 +1,4 @@
+using dotnet.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet.Controllers
@@ -6,28 +7,62 @@ namespace dotnet.Controllers
 	[ApiController]
 	public class MaterialsPageController : ControllerBase
 	{
+		private readonly IUserListMaterialsService _userListMaterialsService;
+
+		public MaterialsPageController(IUserListMaterialsService userListMaterialsService)
+		{
+			_userListMaterialsService = userListMaterialsService;
+		}
+
 		[HttpGet("Materials")]
 		public async Task<IActionResult> GetAllMaterialsAsync()
 		{
-			throw new NotImplementedException();
+			IEnumerable<Material> materials = await _userListMaterialsService.GetAllMaterialsAsync();
+			if (materials == null)
+				return NotFound("Materials Not Found!");
+			return Ok(materials);
 		}
 
 		[HttpGet("Materials/MainGroup/{id}")]
-		public async Task<IActionResult> GetByMainGroupIdAsync(Int64 id)
+		public async Task<IActionResult> GetMaterialsByMainGroupIdAsync(Int64 id)
 		{
-			throw new NotImplementedException();
+			IEnumerable<Material> materials = await _userListMaterialsService.GetMaterialsByMainGroupIdAsync(id);
+			if (materials == null)
+				return NotFound("There is no material with this MainGroupId!");
+			return Ok(materials);
 		}
 
 		[HttpGet("Materials/SubGroup/{id}")]
-		public async Task<IActionResult> GetBySubGroupIdAsync(Int64 id)
+		public async Task<IActionResult> GetMaterialsBySubGroupIdAsync(Int64 id)
 		{
-			throw new NotImplementedException();
+			IEnumerable<Material> materials = await _userListMaterialsService.GetMaterialsBySubGroupIdAsync(id);
+			if (materials == null)
+				return NotFound("There is no material with this SubGroupId!");
+			return Ok(materials);
 		}
 
 		[HttpPost("Materials/AddToCart")]
 		public async Task<IActionResult> AddMaterialToCart(Material material)
 		{
 			throw new NotImplementedException();
+		}
+
+		[HttpGet("MainGroups")]
+		public async Task<IActionResult> GetAllMainGroupsAsync()
+		{
+			IEnumerable<MainGroup> mainGroups = await _userListMaterialsService.GetAllMainGroupsAsync();
+			if (mainGroups == null)
+				return NotFound("MainGroups Not Found!");
+			return Ok(mainGroups);
+		}
+
+		[HttpGet("SubGroups/{id}")]
+		public async Task<IActionResult> GetSubGroupsByMainGroupId(Int64 id)
+		{
+			IEnumerable<SubGroup> subGroups = await _userListMaterialsService.GetSubGroupsByMainGroupId(id);
+			if (subGroups == null)
+				return NotFound("There is no SubGroup with this MainGroupId!");
+			return Ok(subGroups);
 		}
 	}
 }
