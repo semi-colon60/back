@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//Dependency injection for repositories
+//Dependency injection
 builder.Services.AddScoped<IMaterialRepository, MaterialRepository>();
 builder.Services.AddScoped<IMainGroupRepository, MainGroupRepository>();
 builder.Services.AddScoped<ISubGroupRepository, SubGroupRepository>();
@@ -22,7 +22,7 @@ builder.Services.AddScoped<ICommercialIdRepository, CommercialIdRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 
-//Dependency injection for services
+//Dependency injection
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
 builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>();
