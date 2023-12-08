@@ -27,6 +27,8 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
 builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>();
 
+builder.Services.AddScoped<IAddUserService, AddUserService>();
+
 // Add policy for CORS
 builder.Services.AddCors(options =>
 {
