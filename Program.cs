@@ -30,6 +30,7 @@ builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>(
 
 builder.Services.AddScoped<IAddUserService, AddUserService>();
 
+builder.Services.AddScoped<IProfileService, ProfileService>();
 // Add policy for CORS
 builder.Services.AddCors(options =>
 {

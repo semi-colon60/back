@@ -1,3 +1,4 @@
+using dotnet.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet.Controllers
@@ -6,10 +7,25 @@ namespace dotnet.Controllers
 	[ApiController]
 	public class ProfileController : ControllerBase
 	{
-		[HttpGet("Profile")]
-		public async Task<IActionResult> GetProfileAsync()
+		private readonly IProfileService _IProfileService;
+
+		public ProfileController(IProfileService profileService)
 		{
-			throw new NotImplementedException();
+			// Console.WriteLine("xd");
+
+			_IProfileService = profileService;
+
+		}
+
+		[HttpGet("Profile/{userid}")]
+		public async Task<IActionResult> GetProfileAsync(long userid)
+		{
+			// return Ok("xd");
+
+			var result = await _IProfileService.GetCommercialIdById(userid);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result);
 		}
 
 		[HttpPost("Profile/AddAddress")]
