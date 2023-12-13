@@ -26,6 +26,7 @@ builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
 builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 // Add policy for CORS
 builder.Services.AddCors(options =>
@@ -68,7 +69,7 @@ app.UseHttpsRedirection();
 // app.UseAuthorization();
 
 app.MapControllers();
-app.UseCors("AllowAll");
+// app.UseCors("AllowAll");
 
 app.UseCors("AllowAll");
 

@@ -1,3 +1,4 @@
+using dotnet.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet.Controllers
@@ -6,40 +7,65 @@ namespace dotnet.Controllers
 	[ApiController]
 	public class ProfileController : ControllerBase
 	{
-		[HttpGet("Profile")]
-		public async Task<IActionResult> GetProfileAsync()
+		private readonly IProfileService _IProfileService;
+
+		public ProfileController(IProfileService profileService)
 		{
-			throw new NotImplementedException();
+			// Console.WriteLine("xd");
+			// Console.WriteLine("\n\n\nxd\n\n\n");
+			// Console.WriteLine( + "\n");
+
+			_IProfileService = profileService;
+
 		}
 
-		[HttpPost("Profile/AddAddress")]
+		[HttpGet("{userid}")]
+		public async Task<IActionResult> GetProfileAsync(long userid)
+		{
+			var result = await _IProfileService.GetCommercialIdById(userid);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result);
+		}
+
+		[HttpPost("AddAddress")]
 		public async Task<IActionResult> AddAddressAsync(Address address)
 		{
 			throw new NotImplementedException();
 		}
 
-		[HttpPut("Profile/UpdateAddressInfo")]
+		[HttpPut("UpdateAddressInfo")]
 		public async Task<IActionResult> UpdateAdressInfosAsync(Address address)
 		{
 			throw new NotImplementedException();
 		}
 
-		[HttpPut("Profile/UpdatePhone")]
-		public async Task<IActionResult> UpdatePhoneAsync(string phone)
+		[HttpPut("UpdatePhone/{userid}")]
+		public async Task<IActionResult> UpdatePhoneAsync(long userid, [FromBody] string phone)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine(phone);
+			var result = await _IProfileService.UpdatePhone(userid, phone);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Phone);
 		}
 
-		[HttpPut("Profile/UpdateEmail")]
-		public async Task<IActionResult> UpdateEmailAsync(string email)
+		[HttpPut("UpdateEmail/{userid}")]
+		public async Task<IActionResult> UpdateEmailAsync(long userid, [FromBody] string email)
 		{
-			throw new NotImplementedException();
+			var result = await _IProfileService.UpdateEmail(userid, email);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Email);
 		}
 
-		[HttpPut("Profile/UpdateUsername")]
-		public async Task<IActionResult> UpdateUsernameAsync(string username)
+		[HttpPut("UpdateUsername/{userid}")]
+		public async Task<IActionResult> UpdateUsernameAsync(long userid, [FromBody] string username)
 		{
-			throw new NotImplementedException();
+			var result = await _IProfileService.UpdateUsername(userid, username);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Username);
 		}
 	}
 }
