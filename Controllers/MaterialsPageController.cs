@@ -41,10 +41,19 @@ namespace dotnet.Controllers
 			return Ok(materials);
 		}
 
-		[HttpPost("Materials/AddToCart")]
-		public async Task<IActionResult> AddMaterialToCart(Material material)
+		[HttpPost("Cart/AddToCart")]
+		public async Task<IActionResult> AddMaterialToCart([FromBody] CartItem cartItem)
 		{
-			throw new NotImplementedException();
+			if (cartItem == null)
+				return BadRequest("CartItem is null!");
+			CartItem cartItemFromDb = await _userListMaterialsService.AddMaterialToCart(cartItem);
+			return Ok(cartItemFromDb);
+		}
+
+		[HttpGet("Cart/GetCartTotalValues/{id}")]
+		public async Task<IActionResult> GetCartItemsByUserId(Int64 id)
+		{
+			return Ok(await _userListMaterialsService.GetTotals(id));
 		}
 
 		[HttpGet("MainGroups")]
