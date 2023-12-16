@@ -39,11 +39,47 @@ namespace dotnet.Controllers
 		{
 			throw new NotImplementedException();
 		}
+		
+		[HttpPut("UpdateName/{userid}")]
+		public async Task<IActionResult> UpdateNameAsync(long userid, [FromQuery] string name)
+		{
+			var result = await _IProfileService.UpdateName(userid, name);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Name);
+		}
+		
+		[HttpPut("UpdateSurname/{userid}")]
+		public async Task<IActionResult> UpdateSurnameAsync(long userid, [FromQuery] string surname)
+		{
+			var result = await _IProfileService.UpdateSurname(userid, surname);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Surname);
+		}
+		
+		[HttpPut("UpdateUsername/{userid}")]
+		public async Task<IActionResult> UpdateUsernameAsync(long userid, [FromQuery] string username)
+		{
+			var result = await _IProfileService.UpdateUsername(userid, username);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Username);
+		}
+
+		[HttpPut("UpdateCommercialTitle/{userid}")]
+		public async Task<IActionResult> UpdateCommercialTitleAsync(long userid, [FromQuery] string CommercialTitle)
+		{
+			var result = await _IProfileService.UpdateCommercialTitle(userid, CommercialTitle);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.CommercialTitle);
+		}
 
 		[HttpPut("UpdatePhone/{userid}")]
-		public async Task<IActionResult> UpdatePhoneAsync(long userid, [FromBody] string phone)
+		public async Task<IActionResult> UpdatePhoneAsync(long userid, [FromQuery] string phone)
 		{
-			Console.WriteLine(phone);
+			// Console.WriteLine(phone);
 			var result = await _IProfileService.UpdatePhone(userid, phone);
 			if (result == null)
 				return NotFound("User Not Found!");
@@ -51,7 +87,7 @@ namespace dotnet.Controllers
 		}
 
 		[HttpPut("UpdateEmail/{userid}")]
-		public async Task<IActionResult> UpdateEmailAsync(long userid, [FromBody] string email)
+		public async Task<IActionResult> UpdateEmailAsync(long userid, [FromQuery] string email)
 		{
 			var result = await _IProfileService.UpdateEmail(userid, email);
 			if (result == null)
@@ -59,13 +95,5 @@ namespace dotnet.Controllers
 			return Ok(result.Email);
 		}
 
-		[HttpPut("UpdateUsername/{userid}")]
-		public async Task<IActionResult> UpdateUsernameAsync(long userid, [FromBody] string username)
-		{
-			var result = await _IProfileService.UpdateUsername(userid, username);
-			if (result == null)
-				return NotFound("User Not Found!");
-			return Ok(result.Username);
-		}
 	}
 }

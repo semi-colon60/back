@@ -19,6 +19,38 @@ namespace dotnet.Services {
 
 			return commercialId;
 		}
+		public async Task<CommercialId> UpdateName(long id, string name)
+		{
+			CommercialId newCommercialId = await _commercialIdRepository.GetByIdAsync(id);
+			newCommercialId.Name = name;
+
+			await _commercialIdRepository.UpdateAsync(newCommercialId);
+			return newCommercialId;
+		}
+		public async Task<CommercialId> UpdateSurname(long id, string surname)
+		{
+			CommercialId newCommercialId = await _commercialIdRepository.GetByIdAsync(id);
+			newCommercialId.Surname = surname;
+
+			await _commercialIdRepository.UpdateAsync(newCommercialId);
+			return newCommercialId;
+		}
+		public async Task<CommercialId> UpdateUsername(long id, string username)
+		{
+			CommercialId newCommercialId = await _commercialIdRepository.GetByIdAsync(id);
+			newCommercialId.Username = username;
+
+			await _commercialIdRepository.UpdateAsync(newCommercialId);
+			return newCommercialId;
+		}
+		public async Task<CommercialId> UpdateCommercialTitle(long id, string CommercialTitle)
+		{
+			CommercialId newCommercialId = await _commercialIdRepository.GetByIdAsync(id);
+			newCommercialId.CommercialTitle = CommercialTitle;
+
+			await _commercialIdRepository.UpdateAsync(newCommercialId);
+			return newCommercialId;
+		}
 		public async Task<CommercialId> UpdatePhone(long id, string phone)
 		{
 			CommercialId newCommercialId = await _commercialIdRepository.GetByIdAsync(id);
@@ -35,13 +67,6 @@ namespace dotnet.Services {
 			await _commercialIdRepository.UpdateAsync(newCommercialId);
 			return newCommercialId;
 		}
-		public async Task<CommercialId> UpdateUsername(long id, string username)
-		{
-			CommercialId newCommercialId = await _commercialIdRepository.GetByIdAsync(id);
-			newCommercialId.Username = username;
-
-			await _commercialIdRepository.UpdateAsync(newCommercialId);
-			return newCommercialId;
-		}
+	
 	}
 }
