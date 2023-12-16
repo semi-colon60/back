@@ -39,32 +39,22 @@ namespace dotnet.Services {
 			{
 				var cart_items = await  _cartItemRepository.GetCartItems(id);
 				List<CartItemInfosDTO> cartInfos = new List<CartItemInfosDTO>();
-				Console.WriteLine("Buraya da geldi şimdi cartitems yazdırcam");
-				// Console.WriteLine(cart_items.All<CartItems>);
 				foreach (var cartItem in cart_items)
 				{
-
-					Console.WriteLine(cartItem);
 					var material =await _materialRepository.GetByIdAsync(cartItem.MaterialID);
-					//Console.WriteLine(material.);
 					var mg = await _mainGroupRepository.GetByIdAsync(material.MainGroupId);
-					Console.WriteLine(mg.Name);
 					var sg = await _subGroupRepository.GetByIdAsync(material.SubGroupId);
-					Console.WriteLine(sg.Name);
 
 					var cartItemInfosDTO = new CartItemInfosDTO(cartItem.CartItemId, material.MainGroupId, material.SubGroupId, material.MaterialCode,
 																	material.Description, material.Unit, cartItem.Quantity, material.UnitPrice,
 																	material.Mass, material.Volume, material.Count, mg.Name, sg.Name);
-					
-					Console.WriteLine(material);
 					cartInfos.Add(cartItemInfosDTO);
 				}
-				Console.WriteLine("Returne geliyomu control");
 				return cartInfos;
 			}
 			catch (System.Exception)
 			{
-				Console.WriteLine("SERVİCEDEEEEEEEEEE throwa geldi laa\n\n");
+				Console.WriteLine("Service Error\n\n");
 				throw;
 			}
 		}
