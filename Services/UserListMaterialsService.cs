@@ -23,7 +23,15 @@ namespace dotnet.Services.Interfaces
 
 		public async Task<CartItem> AddMaterialToCart(CartItem cartItem)
 		{
-			CartItem cartItemFromDb = await _cartItemRepository.GetCartItem(cartItem.MaterialId, cartItem.CommercialId);
+			CartItem ?cartItemFromDb;
+			try
+			{
+				cartItemFromDb = await _cartItemRepository.GetCartItem(cartItem.MaterialId, cartItem.CommercialId);
+			}
+			catch (Exception)
+			{
+				cartItemFromDb = null;
+			}
 
 			if (cartItemFromDb == null)
 			{
@@ -52,11 +60,11 @@ namespace dotnet.Services.Interfaces
 
 				if (material != null)
 				{
-					if (material.UnitPrice.Trim() != "")
+					if (material.UnitPrice != null && material.UnitPrice.Trim() != "")
 						unitPrice = double.Parse(material.UnitPrice);
-					if (material.Mass.Trim() != "")
+					if (material.Mass != null && material.Mass.Trim() != "")
 						unitWeight = double.Parse(material.Mass);
-					if (material.Volume.Trim() != "")
+					if (material.Volume != null && material.Volume.Trim() != "")
 						unitVolume = double.Parse(material.Volume);
 				}
 
