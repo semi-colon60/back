@@ -16,7 +16,7 @@ namespace dotnet.Controllers
 		[HttpPost("api/AddMaterial/AddMaterial")]
 		public async Task<IActionResult> AddMaterialAsync([FromBody]Material material)
 		{
-			System.Console.WriteLine(material.Count + "	" + material.Length);
+			// System.Console.WriteLine(material.Count + "	" + material.Length);
 			try
 			{
 				await _addMaterialService.AddMaterialAsync(material);

@@ -1,4 +1,3 @@
-using dotnet.DataAcces.Models;
 using dotnet.DataAccess.DbContexts;
 using dotnet.DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;

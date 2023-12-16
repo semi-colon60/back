@@ -1,5 +1,3 @@
-using System.Drawing;
-
 namespace dotnet.DataAccess.Interfaces
 {
 	public interface IOrderRepository

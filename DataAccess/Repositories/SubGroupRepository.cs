@@ -1,6 +1,5 @@
 using dotnet.DataAccess.DbContexts;
 using dotnet.DataAccess.Interfaces;
-using dotnet.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnet.DataAccess.Repositories

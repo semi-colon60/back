@@ -1,5 +1,3 @@
-using dotnet.DataAcces.Models;
-using dotnet.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnet.DataAccess.DbContexts {
@@ -16,5 +14,6 @@ namespace dotnet.DataAccess.DbContexts {
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderDetail> OrderDetails { get; set; }
 		public DbSet<Address> Addresses { get; set; }
+		public DbSet<CartItem> CartItems { get; set; }
     }
 }
