@@ -4,7 +4,7 @@ namespace dotnet.DataAccess.Interfaces
 {
 	public interface ISubGroupRepository
 	{
-		Task<SubGroup> GetByIdAsync(long id);
+		Task<SubGroup> GetByIdAsync(long ?id);
 		Task<IEnumerable<SubGroup>> GetAllAsync();
 		Task AddAsync(SubGroup subGroup);
 		Task UpdateAsync(SubGroup subGroup);

@@ -4,7 +4,7 @@ namespace dotnet.DataAccess.Interfaces
 {
 	public interface IMainGroupRepository
 	{
-		Task<MainGroup> GetByIdAsync(int id);
+		Task<MainGroup> GetByIdAsync(long ?id);
 		Task<IEnumerable<MainGroup>> GetAllAsync();
 		Task AddAsync(MainGroup mainGroup);
 		Task UpdateAsync(MainGroup mainGroup);
