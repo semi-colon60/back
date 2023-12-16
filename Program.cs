@@ -21,6 +21,7 @@ builder.Services.AddScoped<ISubGroupRepository, SubGroupRepository>();
 builder.Services.AddScoped<ICommercialIdRepository, CommercialIdRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddScoped<ICartItemsRepository, CartRepository>();
 
 //Dependency injection for services
 builder.Services.AddScoped<ILoginService, LoginService>();
@@ -29,6 +30,8 @@ builder.Services.AddScoped<IAddMaterialService, AddMaterialService>();
 builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>();
 
 builder.Services.AddScoped<IAddUserService, AddUserService>();
+
+builder.Services.AddScoped<ICartItemsService, CartItemsService>();
 
 builder.Services.AddScoped<IProfileService, ProfileService>();
 // Add policy for CORS
