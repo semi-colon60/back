@@ -38,7 +38,7 @@ namespace dotnet.DataAccess.Repositories
             return await Context.MainGroups.ToListAsync();
         }
 
-        public async Task<MainGroup> GetByIdAsync(int id)
+        public async Task<MainGroup> GetByIdAsync(long ?id)
         {
             return await Context.MainGroups.FirstOrDefaultAsync(m => m.MainGroupId == id)
 				?? throw new ArgumentNullException(nameof(id));
