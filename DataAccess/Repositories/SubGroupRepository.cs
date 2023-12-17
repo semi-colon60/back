@@ -43,7 +43,7 @@ namespace dotnet.DataAccess.Repositories
 			return await Context.SubGroups.ToListAsync();
         }
 
-        public async Task<SubGroup> GetByIdAsync(long id)
+        public async Task<SubGroup> GetByIdAsync(long ?id)
         {
 			return await Context.SubGroups.FirstOrDefaultAsync(m => m.SubGroupId == id)
 				?? throw new ArgumentNullException(nameof(id));

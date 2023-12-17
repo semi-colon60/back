@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using dotnet.Services.Interfaces;
+
 
 namespace dotnet.Controllers
 {
@@ -6,10 +8,20 @@ namespace dotnet.Controllers
 	[ApiController]
 	public class CartController : ControllerBase
 	{
-		[HttpGet("Cart")]
-		public async Task<IActionResult> GetCartAsync()
+		private readonly ICartService _CartItemService;
+
+		public CartController(ICartService cartItemsService)
 		{
-			throw new NotImplementedException();
+			_CartItemService = cartItemsService;
+		}
+
+		[HttpGet("Cart/{id}")]
+		public async Task<IActionResult> GetCartAsync(int id)
+		{
+			var result =  await _CartItemService.GetCartItemInfos(id);
+			if(result == null)
+				return NotFound();
+			return Ok(result);
 		}
 
 		[HttpPut("Cart/ChangeAddress")]
