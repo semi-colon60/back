@@ -8,7 +8,7 @@ namespace dotnet.DataAccess.Models
 	// This enum is used to determine the unit of the material.
 	public enum UnitType
 	{
-		Length,
+		Length = 0,
 		Mass,
 		Volume,
 		Count
