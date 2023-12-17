@@ -2,9 +2,9 @@ using dotnet.Services.DTOs;
 
 namespace dotnet.Services.Interfaces
 {
-	public interface ICartItemsService
+	public interface ICartService
 	{
-		public Task<IEnumerable<CartItems>> GetCartItems(Int64 id);
+		public Task<IEnumerable<CartItem>> GetCartItems(Int64 id);
 
 		public Task<IEnumerable<CartItemInfosDTO>> GetCartItemInfos(Int64 id);
 	}

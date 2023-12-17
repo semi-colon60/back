@@ -8,9 +8,9 @@ namespace dotnet.Controllers
 	[ApiController]
 	public class CartController : ControllerBase
 	{
-		private readonly ICartItemsService _CartItemService;
+		private readonly ICartService _CartItemService;
 
-		public CartController(ICartItemsService cartItemsService)
+		public CartController(ICartService cartItemsService)
 		{
 			_CartItemService = cartItemsService;
 		}

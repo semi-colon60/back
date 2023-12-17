@@ -1,3 +1,4 @@
+using System.Globalization;
 using dotnet.DataAccess.Interfaces;
 using dotnet.Services.DTOs;
 
@@ -8,17 +9,71 @@ namespace dotnet.Services.Interfaces
 		private readonly IMaterialRepository _materialRepository;
 		private readonly IMainGroupRepository _mainGroupRepository;
 		private readonly ISubGroupRepository _subGroupRepository;
+		private readonly ICartItemRepository _cartItemRepository;
 
-		public UserListMaterialsService(IMaterialRepository materialRepository, IMainGroupRepository mainGroupRepository, ISubGroupRepository subGroupRepository)
+		public UserListMaterialsService(IMaterialRepository materialRepository,
+										IMainGroupRepository mainGroupRepository,
+										ISubGroupRepository subGroupRepository,
+										ICartItemRepository cartItemRepository)
 		{
 			_materialRepository = materialRepository;
 			_mainGroupRepository = mainGroupRepository;
 			_subGroupRepository = subGroupRepository;
+			_cartItemRepository = cartItemRepository;
 		}
 
-		public async Task<Material> AddMaterialToCart(Material material)
+		public async Task<CartItem> AddMaterialToCart(CartItem cartItem)
 		{
-			throw new NotImplementedException();
+			CartItem ?cartItemFromDb;
+			try
+			{
+				cartItemFromDb = await _cartItemRepository.GetCartItem(cartItem.MaterialId, cartItem.CommercialId);
+			}
+			catch (Exception)
+			{
+				cartItemFromDb = null;
+			}
+
+			if (cartItemFromDb == null)
+			{
+				await _cartItemRepository.AddCartItem(cartItem);
+				return cartItem;
+			}
+			else
+			{
+				cartItemFromDb.Quantity += cartItem.Quantity;
+				await _cartItemRepository.UpdateCartItem(cartItemFromDb);
+				return cartItemFromDb;
+			}
+		}
+
+		public async Task<TotalCartValues> GetTotals(Int64 CommercialId)
+		{
+			TotalCartValues	_totalCartValues = new();
+			IEnumerable<CartItem> cartItems = await _cartItemRepository.GetAllCartByCommercialId(CommercialId);
+
+			foreach (CartItem cartItem in cartItems)
+			{
+				Material material = await _materialRepository.GetByIdAsync(cartItem.MaterialId);
+				double unitPrice = 0.0,
+					   unitWeight = 0.0,
+					   unitVolume = 0.0;
+
+				if (material != null)
+				{
+					if (material.UnitPrice != null && material.UnitPrice.Trim() != "")
+						unitPrice = double.Parse(material.UnitPrice, CultureInfo.InvariantCulture);
+					if (material.Mass != null && material.Mass.Trim() != "")
+						unitWeight = double.Parse(material.Mass, CultureInfo.InvariantCulture);
+					if (material.Volume != null && material.Volume.Trim() != "")
+						unitVolume = double.Parse(material.Volume, CultureInfo.InvariantCulture);
+				}
+
+				_totalCartValues.TotalPrice += unitPrice * cartItem.Quantity;
+				_totalCartValues.TotalWeight += unitWeight * cartItem.Quantity;
+				_totalCartValues.TotalVolume += unitVolume * cartItem.Quantity;
+			}
+			return _totalCartValues;
 		}
 
 		public async Task<IEnumerable<MainGroup>> GetAllMainGroupsAsync()

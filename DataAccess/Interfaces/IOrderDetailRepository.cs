@@ -1,5 +1,3 @@
-using dotnet.DataAcces.Models;
-
 namespace dotnet.DataAccess.Interfaces
 {
 	public interface IOrderDetailRepository

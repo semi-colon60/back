@@ -21,19 +21,18 @@ builder.Services.AddScoped<ISubGroupRepository, SubGroupRepository>();
 builder.Services.AddScoped<ICommercialIdRepository, CommercialIdRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
-builder.Services.AddScoped<ICartItemsRepository, CartRepository>();
+builder.Services.AddScoped<ICartItemRepository, CartItemRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 
 //Dependency injection for services
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IReviewOrderService, ReviewOrderService>();
 builder.Services.AddScoped<IAddMaterialService, AddMaterialService>();
 builder.Services.AddScoped<IUserListMaterialsService, UserListMaterialsService>();
-
 builder.Services.AddScoped<IAddUserService, AddUserService>();
-
-builder.Services.AddScoped<ICartItemsService, CartItemsService>();
-
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+
 // Add policy for CORS
 builder.Services.AddCors(options =>
 {

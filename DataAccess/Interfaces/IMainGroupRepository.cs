@@ -1,5 +1,3 @@
-using dotnet.DataAccess.Models;
-
 namespace dotnet.DataAccess.Interfaces
 {
 	public interface IMainGroupRepository

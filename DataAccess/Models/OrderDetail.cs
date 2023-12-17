@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace dotnet.DataAcces.Models
+namespace dotnet.DataAccess.Models
 {
 	[Table("order_detail")]
 	public class OrderDetail

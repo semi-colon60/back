@@ -1,17 +1,16 @@
 using dotnet.DataAccess.Interfaces;
 using dotnet.Services.DTOs;
 using dotnet.Services.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace dotnet.Services {
-	public class CartItemsService : ICartItemsService
+	public class CartService : ICartService
 	{
-		private readonly ICartItemsRepository _cartItemRepository;
+		private readonly ICartItemRepository _cartItemRepository;
 		private readonly IMaterialRepository _materialRepository;
-
 		private readonly ISubGroupRepository _subGroupRepository;
 		private readonly IMainGroupRepository _mainGroupRepository;
-		public CartItemsService(IMaterialRepository materialRepository, ICartItemsRepository cartItemsRepository,
+		
+		public CartService(IMaterialRepository materialRepository, ICartItemRepository cartItemsRepository,
 						IMainGroupRepository mainGroupRepository, ISubGroupRepository subGroupRepository)
 		{
 			_cartItemRepository = cartItemsRepository;
@@ -19,12 +18,13 @@ namespace dotnet.Services {
 			_mainGroupRepository = mainGroupRepository;
 			_subGroupRepository = subGroupRepository;
 		}
-        public async Task<IEnumerable<CartItems>> GetCartItems(Int64 id)
+
+        public async Task<IEnumerable<CartItem>> GetCartItems(Int64 id)
         {
            
 			try
 			{
-				return await  _cartItemRepository.GetCartItems(id);
+				return await  _cartItemRepository.GetAllCartByCommercialId(id);
 			}
 			catch (System.Exception)
 			{
@@ -37,11 +37,11 @@ namespace dotnet.Services {
 		{
 			try
 			{
-				var cart_items = await  _cartItemRepository.GetCartItems(id);
+				var cart_items = await  _cartItemRepository.GetAllCartByCommercialId(id);
 				List<CartItemInfosDTO> cartInfos = new List<CartItemInfosDTO>();
 				foreach (var cartItem in cart_items)
 				{
-					var material =await _materialRepository.GetByIdAsync(cartItem.MaterialID);
+					var material =await _materialRepository.GetByIdAsync(cartItem.MaterialId);
 					var mg = await _mainGroupRepository.GetByIdAsync(material.MainGroupId);
 					var sg = await _subGroupRepository.GetByIdAsync(material.SubGroupId);
 
@@ -58,17 +58,5 @@ namespace dotnet.Services {
 				throw;
 			}
 		}
-
-
-        /*        public async Task<LoginUserDTO?> GetCommercialIdByEmailAsync(string email, string password)
-                {
-                    var result = await _commercialIdRepository.GetByEmailAsync(email);
-                    var loginUserDTO = new LoginUserDTO(result.IsAdmin, result.CommercialID);
-                    if(result != null && result.Password == password) {
-                        return loginUserDTO;
-                    }
-                    return null;
-                }
-        */
     }
 }
