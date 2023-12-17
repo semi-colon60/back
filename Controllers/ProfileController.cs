@@ -12,50 +12,88 @@ namespace dotnet.Controllers
 		public ProfileController(IProfileService profileService)
 		{
 			// Console.WriteLine("xd");
+			// Console.WriteLine("\n\n\nxd\n\n\n");
+			// Console.WriteLine( + "\n");
 
 			_IProfileService = profileService;
 
 		}
 
-		[HttpGet("Profile/{userid}")]
+		[HttpGet("{userid}")]
 		public async Task<IActionResult> GetProfileAsync(long userid)
 		{
-			// return Ok("xd");
-
 			var result = await _IProfileService.GetCommercialIdById(userid);
 			if (result == null)
 				return NotFound("User Not Found!");
 			return Ok(result);
 		}
 
-		[HttpPost("Profile/AddAddress")]
+		[HttpPost("AddAddress")]
 		public async Task<IActionResult> AddAddressAsync(Address address)
 		{
 			throw new NotImplementedException();
 		}
 
-		[HttpPut("Profile/UpdateAddressInfo")]
+		[HttpPut("UpdateAddressInfo")]
 		public async Task<IActionResult> UpdateAdressInfosAsync(Address address)
 		{
 			throw new NotImplementedException();
 		}
-
-		[HttpPut("Profile/UpdatePhone")]
-		public async Task<IActionResult> UpdatePhoneAsync(string phone)
+		
+		[HttpPut("UpdateName/{userid}")]
+		public async Task<IActionResult> UpdateNameAsync(long userid, [FromQuery] string name)
 		{
-			throw new NotImplementedException();
+			var result = await _IProfileService.UpdateName(userid, name);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Name);
+		}
+		
+		[HttpPut("UpdateSurname/{userid}")]
+		public async Task<IActionResult> UpdateSurnameAsync(long userid, [FromQuery] string surname)
+		{
+			var result = await _IProfileService.UpdateSurname(userid, surname);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Surname);
+		}
+		
+		[HttpPut("UpdateUsername/{userid}")]
+		public async Task<IActionResult> UpdateUsernameAsync(long userid, [FromQuery] string username)
+		{
+			var result = await _IProfileService.UpdateUsername(userid, username);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Username);
 		}
 
-		[HttpPut("Profile/UpdateEmail")]
-		public async Task<IActionResult> UpdateEmailAsync(string email)
+		[HttpPut("UpdateCommercialTitle/{userid}")]
+		public async Task<IActionResult> UpdateCommercialTitleAsync(long userid, [FromQuery] string CommercialTitle)
 		{
-			throw new NotImplementedException();
+			var result = await _IProfileService.UpdateCommercialTitle(userid, CommercialTitle);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.CommercialTitle);
 		}
 
-		[HttpPut("Profile/UpdateUsername")]
-		public async Task<IActionResult> UpdateUsernameAsync(string username)
+		[HttpPut("UpdatePhone/{userid}")]
+		public async Task<IActionResult> UpdatePhoneAsync(long userid, [FromQuery] string phone)
 		{
-			throw new NotImplementedException();
+			// Console.WriteLine(phone);
+			var result = await _IProfileService.UpdatePhone(userid, phone);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Phone);
 		}
+
+		[HttpPut("UpdateEmail/{userid}")]
+		public async Task<IActionResult> UpdateEmailAsync(long userid, [FromQuery] string email)
+		{
+			var result = await _IProfileService.UpdateEmail(userid, email);
+			if (result == null)
+				return NotFound("User Not Found!");
+			return Ok(result.Email);
+		}
+
 	}
 }

@@ -74,7 +74,7 @@ app.UseHttpsRedirection();
 // app.UseAuthorization();
 
 app.MapControllers();
-app.UseCors("AllowAll");
+// app.UseCors("AllowAll");
 
 app.UseCors("AllowAll");
 
