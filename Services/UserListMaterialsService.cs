@@ -1,3 +1,4 @@
+using System.Globalization;
 using dotnet.DataAccess.Interfaces;
 using dotnet.Services.DTOs;
 
@@ -61,11 +62,11 @@ namespace dotnet.Services.Interfaces
 				if (material != null)
 				{
 					if (material.UnitPrice != null && material.UnitPrice.Trim() != "")
-						unitPrice = double.Parse(material.UnitPrice);
+						unitPrice = double.Parse(material.UnitPrice, CultureInfo.InvariantCulture);
 					if (material.Mass != null && material.Mass.Trim() != "")
-						unitWeight = double.Parse(material.Mass);
+						unitWeight = double.Parse(material.Mass, CultureInfo.InvariantCulture);
 					if (material.Volume != null && material.Volume.Trim() != "")
-						unitVolume = double.Parse(material.Volume);
+						unitVolume = double.Parse(material.Volume, CultureInfo.InvariantCulture);
 				}
 
 				_totalCartValues.TotalPrice += unitPrice * cartItem.Quantity;
